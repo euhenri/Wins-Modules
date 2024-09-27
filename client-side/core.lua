@@ -1,3 +1,6 @@
+------------------------------------------------------------------------------------------------------------------------------------------
+-- Hit
+------------------------------------------------------------------------------------------------------------------------------------------
 function hit(shooterId, targetId, damage, weaponId, hitLocation, matchId)
     local weapons = {
         "WEAPON_GRENADELAUNCHER",
@@ -113,6 +116,10 @@ function hit(shooterId, targetId, damage, weaponId, hitLocation, matchId)
     print("Hit registrado:", shooterId, "->", targetId, "Dano:", damage)
 end
 
+
+------------------------------------------------------------------------------------------------------------------------------------------
+-- Information table
+------------------------------------------------------------------------------------------------------------------------------------------
 Games = {}
 
 Games.data = {
@@ -179,13 +186,17 @@ Games.data = {
             current = 1,
             data = {
                 [1] = {
-                    -- Dados da rodada serão inseridos aqui.
+                    -- Round data will be entered here.
                 }
             }
         }
     }
 }
 
+
+------------------------------------------------------------------------------------------------------------------------------------------
+-- ShowCombatStats
+------------------------------------------------------------------------------------------------------------------------------------------
 function ShowCombatStats(playerId, matchId)
     local match = Games.data[matchId]
     local players = match.players.data
@@ -240,6 +251,9 @@ function ShowCombatStats(playerId, matchId)
     end
 end
 
+------------------------------------------------------------------------------------------------------------------------------------------
+-- DrawText
+------------------------------------------------------------------------------------------------------------------------------------------
 function DrawTextUI(text, x, y, scale)
     SetTextFont(4)
     SetTextCentre(true)
@@ -250,12 +264,13 @@ function DrawTextUI(text, x, y, scale)
     AddTextComponentString(text)
     DrawText(x, y)
 end
-
-
+------------------------------------------------------------------------------------------------------------------------------------------
+-- Thread
+------------------------------------------------------------------------------------------------------------------------------------------
 CreateThread(function()
     while true do
         local sleep = 0
-        ShowCombatStats(10, "matchmaking-01") -- Mostra as estatísticas do jogador 10
+        ShowCombatStats(10, "matchmaking-01") -- Show player stats 10
         Wait(sleep)
     end
 end)
@@ -268,5 +283,4 @@ CreateThread(function()
     -- hit(10, 7, 150, "AK-47", 1, 'matchmaking-01')
     -- hit(10, 8, 150, "AK-47", 1, 'matchmaking-01')
     hit(10, 9, 150, 95, 1, 'matchmaking-01')
-
 end)
